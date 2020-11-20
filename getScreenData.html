@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        video {
+            width: 100%;
+        }
+    </style>
+    <script>
+        let screenStream;
+        window.onload = () => {
+            const options = {
+                video: { cursor: "always" },
+                audio: {
+                    echCancellation: true,
+                    noiseSuppression: true,
+                    sampleRate: 44100
+                }
+            }
+            navigator.mediaDevices.getDisplayMedia(options).then(stream => {
+                const video = document.createElement("video");
+                screenStream = stream;
+                video.srcObject = screenStream;
+
+                console.log(video.srcObject);
+                
+                document.body.appendChild(video);
+                video.play();
+            });
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
