@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>심심</title>
+	<style>
+		html, body {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	
+	<script>
+		let R = 0;
+		let G = 0;
+		let B = 0;
+		let Rtoggle = 1;
+		let Gtoggle = 1;
+		let Btoggle = 1;
+		setInterval(function() {
+			switch(Math.floor(Math.random() * 3)) {
+				case 0: { //R
+					R += Rtoggle;
+					if(R < 0 || R > 255) {
+						R -= Rtoggle;
+						Rtoggle *= -1;
+					}
+					break;
+				}
+				case 1: { //G
+					G += Gtoggle;
+					if(G < 0 || G > 255) {
+						G -= Gtoggle;
+						Gtoggle *= -1;
+					}
+					break;
+				}
+				case 2: { //B
+					B += Btoggle;
+					if(B < 0 || B > 255) {
+						B -= Btoggle;
+						Btoggle *= -1;
+					}
+					break;
+				}
+			}
+			
+			document.body.style.backgroundColor = "rgb(" + R + "," + G + "," + B + ")";
+		}, 2);
+	</script>
+</head>
+
+<body>
+</body>
+</html>
