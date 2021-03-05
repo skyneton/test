@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" class="inpFile">
+    <script>
+        document.getElementsByClassName("inpFile")[0].onchange = () => {
+            createImageBitmap(event.target.files[0]).then(getImageFromBitMap);
+        };
+
+        const getImageFromBitMap = bitmap => {
+            const canvas = new OffscreenCanvas(bitmap.width, bitmap.height),
+                context = canvas.getContext("2d");
+            context.drawImage(bitmap, 0, 0);
+            window.a = context;
+
+            canvas.convertToBlob().then(getBlob);
+        }
+
+        const getBlob = blob => {
+            console.log(blob);
+            const image = new Image();
+            image.src = URL.createObjectURL(blob);
+            document.body.appendChild(image);
+            image.onload = () => {
+                URL.revokeObjectURL(image.src);
+            };
+        }
+    </script>
+</body>
+</html>
